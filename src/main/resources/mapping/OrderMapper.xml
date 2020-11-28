@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.library.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.github.library.entity.Order">
+    <id column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="seat_id" jdbcType="INTEGER" property="seatId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="appoint _time" jdbcType="TIMESTAMP" property="appointTime" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="signback_time" jdbcType="TIMESTAMP" property="signbackTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    o_id, order_no, seat_id, user_id, "appoint _time", sign_time, signback_time, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where o_id = #{oId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where o_id = #{oId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.library.entity.Order">
+    insert into t_order (o_id, order_no, seat_id, 
+      user_id, "appoint _time", sign_time, 
+      signback_time, status)
+    values (#{oId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{seatId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{appointTime,jdbcType=TIMESTAMP}, #{signTime,jdbcType=TIMESTAMP}, 
+      #{signbackTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.library.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        o_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="seatId != null">
+        seat_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="appointTime != null">
+        "appoint _time",
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="signbackTime != null">
+        signback_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        #{oId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="seatId != null">
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appointTime != null">
+        #{appointTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signbackTime != null">
+        #{signbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.library.entity.Order">
+    update t_order
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="seatId != null">
+        seat_id = #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appointTime != null">
+        "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signbackTime != null">
+        signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.library.entity.Order">
+    update t_order
+    set order_no = #{orderNo,jdbcType=BIGINT},
+      seat_id = #{seatId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.github.library.entity.Order">
+    <id column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="seat_id" jdbcType="INTEGER" property="seatId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="appoint _time" jdbcType="TIMESTAMP" property="appointTime" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="signback_time" jdbcType="TIMESTAMP" property="signbackTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    o_id, order_no, seat_id, user_id, "appoint _time", sign_time, signback_time, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where o_id = #{oId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where o_id = #{oId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.library.entity.Order">
+    insert into t_order (o_id, order_no, seat_id, 
+      user_id, "appoint _time", sign_time, 
+      signback_time, status)
+    values (#{oId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{seatId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{appointTime,jdbcType=TIMESTAMP}, #{signTime,jdbcType=TIMESTAMP}, 
+      #{signbackTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.library.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        o_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="seatId != null">
+        seat_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="appointTime != null">
+        "appoint _time",
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="signbackTime != null">
+        signback_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        #{oId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="seatId != null">
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appointTime != null">
+        #{appointTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signbackTime != null">
+        #{signbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.library.entity.Order">
+    update t_order
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="seatId != null">
+        seat_id = #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appointTime != null">
+        "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signbackTime != null">
+        signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.library.entity.Order">
+    update t_order
+    set order_no = #{orderNo,jdbcType=BIGINT},
+      seat_id = #{seatId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.github.library.entity.Order">
+    <id column="o_id" jdbcType="INTEGER" property="oId" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="seat_id" jdbcType="INTEGER" property="seatId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="appoint _time" jdbcType="TIMESTAMP" property="appointTime" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="signback_time" jdbcType="TIMESTAMP" property="signbackTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    o_id, order_no, seat_id, user_id, "appoint _time", sign_time, signback_time, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where o_id = #{oId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order
+    where o_id = #{oId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.library.entity.Order">
+    insert into t_order (o_id, order_no, seat_id, 
+      user_id, "appoint _time", sign_time, 
+      signback_time, status)
+    values (#{oId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{seatId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{appointTime,jdbcType=TIMESTAMP}, #{signTime,jdbcType=TIMESTAMP}, 
+      #{signbackTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.library.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        o_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="seatId != null">
+        seat_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="appointTime != null">
+        "appoint _time",
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="signbackTime != null">
+        signback_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oId != null">
+        #{oId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="seatId != null">
+        #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appointTime != null">
+        #{appointTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signbackTime != null">
+        #{signbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.library.entity.Order">
+    update t_order
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="seatId != null">
+        seat_id = #{seatId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appointTime != null">
+        "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signbackTime != null">
+        signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.library.entity.Order">
+    update t_order
+    set order_no = #{orderNo,jdbcType=BIGINT},
+      seat_id = #{seatId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where o_id = #{oId,jdbcType=INTEGER}
+  </update>
+</mapper>

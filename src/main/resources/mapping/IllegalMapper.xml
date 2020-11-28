@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.library.mapper.IllegalMapper">
+  <resultMap id="BaseResultMap" type="com.github.library.entity.Illegal">
+    <id column="i_id" jdbcType="INTEGER" property="iId" />
+    <result column="stu_no" jdbcType="INTEGER" property="stuNo" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    i_id, stu_no, stu_name, time, score, remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_Illegal
+    where i_id = #{iId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_Illegal
+    where i_id = #{iId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.library.entity.Illegal">
+    insert into t_Illegal (i_id, stu_no, stu_name, 
+      time, score, remarks
+      )
+    values (#{iId,jdbcType=INTEGER}, #{stuNo,jdbcType=INTEGER}, #{stuName,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.library.entity.Illegal">
+    insert into t_Illegal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iId != null">
+        i_id,
+      </if>
+      <if test="stuNo != null">
+        stu_no,
+      </if>
+      <if test="stuName != null">
+        stu_name,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iId != null">
+        #{iId,jdbcType=INTEGER},
+      </if>
+      <if test="stuNo != null">
+        #{stuNo,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.library.entity.Illegal">
+    update t_Illegal
+    <set>
+      <if test="stuNo != null">
+        stu_no = #{stuNo,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null">
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where i_id = #{iId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.library.entity.Illegal">
+    update t_Illegal
+    set stu_no = #{stuNo,jdbcType=INTEGER},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where i_id = #{iId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.github.library.entity.Illegal">
+    <id column="i_id" jdbcType="INTEGER" property="iId" />
+    <result column="stu_no" jdbcType="INTEGER" property="stuNo" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    i_id, stu_no, stu_name, time, score, remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_Illegal
+    where i_id = #{iId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_Illegal
+    where i_id = #{iId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.github.library.entity.Illegal">
+    insert into t_Illegal (i_id, stu_no, stu_name, 
+      time, score, remarks
+      )
+    values (#{iId,jdbcType=INTEGER}, #{stuNo,jdbcType=INTEGER}, #{stuName,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.library.entity.Illegal">
+    insert into t_Illegal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iId != null">
+        i_id,
+      </if>
+      <if test="stuNo != null">
+        stu_no,
+      </if>
+      <if test="stuName != null">
+        stu_name,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iId != null">
+        #{iId,jdbcType=INTEGER},
+      </if>
+      <if test="stuNo != null">
+        #{stuNo,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.library.entity.Illegal">
+    update t_Illegal
+    <set>
+      <if test="stuNo != null">
+        stu_no = #{stuNo,jdbcType=INTEGER},
+      </if>
+      <if test="stuName != null">
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where i_id = #{iId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.library.entity.Illegal">
+    update t_Illegal
+    set stu_no = #{stuNo,jdbcType=INTEGER},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where i_id = #{iId,jdbcType=INTEGER}
+  </update>
+</mapper>
