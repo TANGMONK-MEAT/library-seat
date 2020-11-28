@@ -2,9 +2,7 @@ package com.github.library.mapper;
 
 /**
  * @author zwl
- * @date 2020/11/27 11:56
+ * @date 2020/11/28 18:01
  */
-public interface OrderMapper {
-
-
+public interface NoticeMapper {
 }
