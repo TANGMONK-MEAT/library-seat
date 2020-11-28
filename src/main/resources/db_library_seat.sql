@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 28/11/2020 19:06:22
+ Date: 28/11/2020 21:55:51
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +34,12 @@ CREATE TABLE `t_Illegal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='违规记录表';
 
 -- ----------------------------
+-- Records of t_Illegal
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_leave
 -- ----------------------------
 DROP TABLE IF EXISTS `t_leave`;
@@ -52,6 +58,12 @@ CREATE TABLE `t_leave` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='中途暂离记录表';
 
 -- ----------------------------
+-- Records of t_leave
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_look
 -- ----------------------------
 DROP TABLE IF EXISTS `t_look`;
@@ -65,6 +77,12 @@ CREATE TABLE `t_look` (
   KEY `look_user_key` (`stu_no`),
   CONSTRAINT `look_user_key` FOREIGN KEY (`stu_no`) REFERENCES `t_user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='监督描述表';
+
+-- ----------------------------
+-- Records of t_look
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_look_img
@@ -82,6 +100,12 @@ CREATE TABLE `t_look_img` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='监督图片表';
 
 -- ----------------------------
+-- Records of t_look_img
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `t_notice`;
@@ -92,6 +116,12 @@ CREATE TABLE `t_notice` (
   `time` datetime NOT NULL COMMENT '发表时间',
   PRIMARY KEY (`n_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统通知表';
+
+-- ----------------------------
+-- Records of t_notice
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_order
@@ -115,6 +145,12 @@ CREATE TABLE `t_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户订单表';
 
 -- ----------------------------
+-- Records of t_order
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_power
 -- ----------------------------
 DROP TABLE IF EXISTS `t_power`;
@@ -123,6 +159,15 @@ CREATE TABLE `t_power` (
   `p_level` int NOT NULL COMMENT '权限等级',
   PRIMARY KEY (`p_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='权限表；\n001（1）-普通 ；\n010（2）-管理 ；\n100（4）-授权 ；';
+
+-- ----------------------------
+-- Records of t_power
+-- ----------------------------
+BEGIN;
+INSERT INTO `t_power` VALUES (1, 1);
+INSERT INTO `t_power` VALUES (2, 2);
+INSERT INTO `t_power` VALUES (3, 4);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_role
@@ -134,6 +179,15 @@ CREATE TABLE `t_role` (
   `r_power` int NOT NULL COMMENT '1-学生-001（1）\n2-管理员-011（3）\n3-授权管理员-111（7）',
   PRIMARY KEY (`r_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
+
+-- ----------------------------
+-- Records of t_role
+-- ----------------------------
+BEGIN;
+INSERT INTO `t_role` VALUES (1, '学生', 1);
+INSERT INTO `t_role` VALUES (2, '管理员', 3);
+INSERT INTO `t_role` VALUES (3, '授权管理员', 7);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_score
@@ -150,6 +204,12 @@ CREATE TABLE `t_score` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='信誉分表';
 
 -- ----------------------------
+-- Records of t_score
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_seat
 -- ----------------------------
 DROP TABLE IF EXISTS `t_seat`;
@@ -162,6 +222,12 @@ CREATE TABLE `t_seat` (
   PRIMARY KEY (`s_id`),
   UNIQUE KEY `seat_id` (`floor`,`room`,`seat`) COMMENT '座位号唯一标识'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='座位表';
+
+-- ----------------------------
+-- Records of t_seat
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_user
@@ -186,5 +252,11 @@ CREATE TABLE `t_user` (
   KEY `user_role_key` (`u_type`),
   CONSTRAINT `user_role_key` FOREIGN KEY (`u_type`) REFERENCES `t_role` (`r_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+-- ----------------------------
+-- Records of t_user
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
