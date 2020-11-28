@@ -16,10 +16,4 @@ import java.lang.annotation.*;
 @ResponseBody
 public @interface ResultResponseBody {
 
-    /**
-     * 默认值：true，开启
-     *
-     * @return true
-     */
-    boolean enable() default true;
 }

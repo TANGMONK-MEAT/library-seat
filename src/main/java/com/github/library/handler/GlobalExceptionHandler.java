@@ -6,14 +6,19 @@ import com.github.library.result.Result;
 import com.github.library.result.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author zwl
@@ -21,9 +26,10 @@ import org.springframework.web.util.WebUtils;
  */
 @ControllerAdvice
 @ResultResponseBody // 这个注解必须设置，将异常响应结果进行统一统一
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     /**
      * 业务异常
