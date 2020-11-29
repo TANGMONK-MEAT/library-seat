@@ -1,8 +1,6 @@
 package com.github.library.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 /**
  * @author zwl
@@ -11,11 +9,12 @@ import org.springframework.stereotype.Component;
 public interface UserMapper<T> extends BaseMapper<T>{
 
     /**
-     * 判断指定用户是否存在
+     * 通过用户名查找用户
      *
-     * @param username 用户名
-     * @return 存在，返回用户信息；否则返回null
+     * @param account 账户
+     * @return 用户详情
      */
-    T existsUserWithUserName(@Param("username") String username) throws Exception;
+    T findByAccount(@Param("account") String account) throws Exception;
+
 
 }
