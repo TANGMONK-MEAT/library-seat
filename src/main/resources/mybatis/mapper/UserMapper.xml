@@ -1,6 +1,124 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.library.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.github.library.entity.User">
+        <id column="u_id" jdbcType="INTEGER" property="uId" />
+        <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
+        <result column="u_account" jdbcType="VARCHAR" property="uAccount" />
+        <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
+        <result column="country" jdbcType="VARCHAR" property="country" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
+    </resultMap>
+
+
+    <sql id="selectWhere">
+        <where>
+            <if test="t.uId != null">
+                and u_id = #{t.uId}
+            </if>
+            <if test="t.wxOpenid != null">
+                and wx_openid =#{t.wxOpenid}
+            </if>
+            <if test="t.uAccount != null">
+                and u_account=#{t.uAccount}
+            </if>
+            <if test="t.uPassword != null">
+                and u_password=#{t.uPassword}
+            </if>
+            <if test="t.nickName != null">
+                and nick_name=#{t.nickName}
+            </if>
+            <if test="t.gender != null">
+                and gender=#{t.gender}
+            </if>
+            <if test="t.phone != null">
+                and phone=#{t.phone}
+            </if>
+            <if test="t.avatarurl != null">
+                and avatarUrl=#{t.avatarurl}
+            </if>
+            <if test="t.country != null">
+                and country=#{t.country}
+            </if>
+            <if test="t.province != null">
+                and province=#{t.province}
+            </if>
+            <if test="t.city != null">
+                and city=#{t.city}
+            </if>
+        </where>
+    </sql>
+
+    <select id="findOfList" resultMap="BaseResultMap">
+        select * from t_user
+        <include refid="selectWhere"></include>
+    </select>
+
+    <select id="count" resultType="int">
+        select * from t_user
+        <include refid="selectWhere"></include>
+    </select>
+
+    <select id="findOne" resultMap="BaseResultMap">
+        select * from t_user
+        where u_id=#{id}
+    </select>
+
+    <select id="findOne" resultMap="BaseResultMap">
+        select * from t_user
+        <include refid="selectWhere"></include>
+    </select>
+
+    <insert id="addOne">
+        insert into t_user values (#{t.uId}, #{t.wxOpenid}, #{t.uAccount},
+      #{t.uPassword}, #{t.nickName}, #{t.gender},
+      #{t.phone}, #{t.avatarurl}, #{t.country},
+      #{t.province}, #{t.city}
+    </insert>
+
+    <update id="updateOne">
+        update t_user
+        <set>
+            <if test="wxOpenid != null">
+                wx_openid = #{t.wxOpenid},
+            </if>
+            <if test="uAccount != null">
+                u_account = #{t.uAccount},
+            </if>
+            <if test="uPassword != null">
+                u_password = #{t.uPassword},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{t.nickName},
+            </if>
+            <if test="gender != null">
+                gender = #{t.gender},
+            </if>
+            <if test="phone != null">
+                phone = #{t.phone},
+            </if>
+            <if test="avatarurl != null">
+                avatarUrl = #{t.avatarurl},
+            </if>
+            <if test="country != null">
+                country = #{t.country},
+            </if>
+            <if test="province != null">
+                province = #{t.province},
+            </if>
+            <if test="city != null">
+                city = #{t.city},
+            </if>
+        </set>
+        where u_id = #{uId,jdbcType=INTEGER}
+    </update>
+
+
 
 
 
