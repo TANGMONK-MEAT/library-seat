@@ -14,7 +14,7 @@ public interface SeatMapper<T> extends BaseMapper<T> {
      * @param t
      * @return 影响行数
      */
-    int takeSeat(@Param("s") T t) throws Exception;
+    int takeSeat(T t) throws Exception;
 
     /**
      * 取消占座
@@ -30,6 +30,6 @@ public interface SeatMapper<T> extends BaseMapper<T> {
      * @param t
      * @return 空闲座位记录数量
      */
-    int findFreeSeat(@Param("s") T t) throws Exception;
+    int findFreeSeat(T t) throws Exception;
 
 }

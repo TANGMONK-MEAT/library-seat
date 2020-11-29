@@ -2,78 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.library.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.github.library.entity.User">
-        <id column="u_id" jdbcType="INTEGER" property="uId" />
-        <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
-        <result column="u_account" jdbcType="VARCHAR" property="uAccount" />
-        <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
-        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-        <result column="gender" jdbcType="TINYINT" property="gender" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="phone" jdbcType="VARCHAR" property="phone" />
-        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
-        <result column="country" jdbcType="VARCHAR" property="country" />
-        <result column="province" jdbcType="VARCHAR" property="province" />
-        <result column="city" jdbcType="VARCHAR" property="city" />
-        <result column="status" jdbcType="TINYINT" property="status" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
-        <result column="desc" jdbcType="VARCHAR" property="desc" />
+        <id column="u_id" jdbcType="INTEGER" property="uId"/>
+        <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid"/>
+        <result column="u_account" jdbcType="VARCHAR" property="uAccount"/>
+        <result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="desc" jdbcType="VARCHAR" property="desc"/>
     </resultMap>
 
 
     <sql id="selectWhere">
         <where>
-            <if test="t.uId != null">
-                and u_id = #{t.uId}
+            <if test="uId != null">
+                and u_id=#{uId}
             </if>
-            <if test="t.wxOpenid != null and t.wxOpenid != ''">
-                and wx_openid =#{t.wxOpenid}
+            <if test="wxOpenid != null and wxOpenid != ''">
+                and wx_openid=#{wxOpenid}
             </if>
-            <if test="t.uAccount != null and t.uAccount != ''">
-                and u_account=#{t.uAccount}
+            <if test="uAccount != null and uAccount != ''">
+                and u_account=#{uAccount}
             </if>
-            <if test="t.uPassword != null and t.uPassword != ''">
-                and u_password=#{t.uPassword}
+            <if test="uPassword != null and uPassword != ''">
+                and u_password=#{uPassword}
             </if>
-            <if test="t.nickName != null and t.nickName != ''">
-                and nick_name=#{t.nickName}
+            <if test="nickName != null and nickName != ''">
+                and nick_name=#{nickName}
             </if>
-            <if test="t.gender != null">
-                and gender=#{t.gender}
+            <if test="gender != null">
+                and gender=#{gender}
             </if>
-            <if test="t.email != null and t.email != ''">
-                and email=#{t.email}
+            <if test="email != null and email != ''">
+                and email=#{email}
             </if>
-            <if test="t.phone != null">
-                and phone=#{t.phone}
+            <if test="phone != null">
+                and phone=#{phone}
             </if>
-            <if test="t.avatarurl != null and t.avatarurl != ''">
-                and avatarUrl=#{t.avatarurl}
+            <if test="avatarurl != null and avatarurl != ''">
+                and avatarUrl=#{avatarurl}
             </if>
-            <if test="t.country != null and t.country != ''">
-                and country=#{t.country}
+            <if test="country != null and country != ''">
+                and country=#{country}
             </if>
-            <if test="t.province != null and t.province != ''">
-                and province=#{t.province}
+            <if test="province != null and province != ''">
+                and province=#{province}
             </if>
-            <if test="t.city != null and t.city != ''">
-                and city=#{t.city}
+            <if test="city != null and city != ''">
+                and city=#{city}
             </if>
-            <if test="t.status != null">
-                and #{t.status}
+            <if test="status != null">
+                and status=#{status}
             </if>
-            <if test="t.createTime != null">
-                and #{t.createTime}
+            <if test="createTime != null">
+                and create_time=#{createTime}
             </if>
-            <if test="t.updateTime != null">
-                and #{t.updateTime}
+            <if test="updateTime != null">
+                and update_time=#{updateTime}
             </if>
-            <if test="t.lastLoginTime != null">
-                and #{t.lastLoginTime}
+            <if test="lastLoginTime != null">
+                and last_login_time=#{lastLoginTime}
             </if>
-            <if test="t.desc != null and t.desc != ''">
-                and #{t.desc}
+            <if test="desc != null and desc != ''">
+                and `desc`=#{desc}
             </if>
         </where>
     </sql>
@@ -84,7 +84,7 @@
     </select>
 
     <select id="count" resultType="int">
-        select * from t_user
+        select count(*) from t_user
         <include refid="selectWhere"/>
     </select>
 
@@ -116,60 +116,57 @@
     <update id="updateOne">
         update t_user
         <set>
-            <if test="t.wxOpenid != null and t.wxOpenid != ''">
-                wx_openid = #{t.wxOpenid},
+            <if test="wxOpenid != null and wxOpenid != ''">
+                wx_openid = #{wxOpenid},
             </if>
-            <if test="t.uAccount != null and t.uAccount != ''">
-                u_account = #{t.uAccount},
+            <if test="uAccount != null and uAccount != ''">
+                u_account = #{uAccount},
             </if>
-            <if test="t.uPassword != null and t.uPassword != ''">
-                u_password = #{t.uPassword},
+            <if test="uPassword != null and uPassword != ''">
+                u_password = #{uPassword},
             </if>
-            <if test="t.nickName != null and t.nickName != ''">
-                nick_name = #{t.nickName},
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
             </if>
-            <if test="t.gender != null">
-                gender = #{t.gender},
+            <if test="gender != null">
+                gender = #{gender},
             </if>
-            <if test="t.email != null and t.email != ''">
+            <if test="email != null and email != ''">
                 email = #{email},
             </if>
-            <if test="t.phone != null and t.phone != ''">
-                phone = #{t.phone},
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
             </if>
-            <if test="t.avatarurl != null and t.avatarurl != ''">
-                avatarUrl = #{t.avatarurl},
+            <if test="avatarurl != null and avatarurl != ''">
+                avatarUrl = #{avatarurl},
             </if>
-            <if test="t.country != null and t.country != ''">
-                country = #{t.country},
+            <if test="country != null and country != ''">
+                country = #{country},
             </if>
-            <if test="t.province != null and t.province != ''">
-                province = #{t.province},
+            <if test="province != null and province != ''">
+                province = #{province},
             </if>
-            <if test="t.city != null and t.city != ''">
-                city = #{t.city},
+            <if test="city != null and city != ''">
+                city = #{city},
             </if>
-            <if test="t.status != null">
+            <if test="status != null">
                 status = #{status},
             </if>
-            <if test="t.createTime != null">
+            <if test="createTime != null">
                 create_time = #{createTime},
             </if>
-            <if test="t.updateTime != null">
+            <if test="updateTime != null">
                 update_time = #{updateTime},
             </if>
-            <if test="t.lastLoginTime != null">
+            <if test="lastLoginTime != null">
                 last_login_time = #{lastLoginTime},
             </if>
-            <if test="t.desc != null and t.desc != ''">
+            <if test="desc != null and desc != ''">
                 `desc` = #{desc},
             </if>
         </set>
         where u_id = #{uId}
     </update>
-
-
-
 
 
 </mapper>
