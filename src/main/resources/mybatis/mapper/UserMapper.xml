@@ -93,7 +93,7 @@
         where u_id=#{id}
     </select>
 
-    <select id="findOne" resultMap="BaseResultMap">
+    <select id="findOneSelective" resultMap="BaseResultMap">
         select * from t_user
         <include refid="selectWhere"/>
     </select>
