@@ -1,6 +1,6 @@
 package com.github.library;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -11,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestBuilder {
 
     @Test
-    public void test01(){
-        // Result.newBuilder().data("");
+    public void test(){
+
     }
+
 }
