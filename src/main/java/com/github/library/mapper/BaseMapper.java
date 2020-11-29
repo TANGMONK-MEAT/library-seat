@@ -58,13 +58,13 @@ public interface BaseMapper<T> {
      */
     int addOneSelective(T t) throws Exception;
 
-//    /**
-//     * 修改一条记录
-//     *
-//     * @param t
-//     * @return 影响行数
-//     */
-//    int updateOne(T t) throws Exception;
+    ///**
+    // * 修改一条记录
+    // *
+    // * @param t
+    // * @return 影响行数
+    // */
+    //int updateOne(T t) throws Exception;
 
     /**
      * 有选择的修改一条记录
