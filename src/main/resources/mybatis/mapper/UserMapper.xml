@@ -8,11 +8,17 @@
         <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
         <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
         <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
         <result column="country" jdbcType="VARCHAR" property="country" />
         <result column="province" jdbcType="VARCHAR" property="province" />
         <result column="city" jdbcType="VARCHAR" property="city" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
     </resultMap>
 
 
@@ -21,47 +27,65 @@
             <if test="t.uId != null">
                 and u_id = #{t.uId}
             </if>
-            <if test="t.wxOpenid != null">
+            <if test="t.wxOpenid != null and t.wxOpenid != ''">
                 and wx_openid =#{t.wxOpenid}
             </if>
-            <if test="t.uAccount != null">
+            <if test="t.uAccount != null and t.uAccount != ''">
                 and u_account=#{t.uAccount}
             </if>
-            <if test="t.uPassword != null">
+            <if test="t.uPassword != null and t.uPassword != ''">
                 and u_password=#{t.uPassword}
             </if>
-            <if test="t.nickName != null">
+            <if test="t.nickName != null and t.nickName != ''">
                 and nick_name=#{t.nickName}
             </if>
             <if test="t.gender != null">
                 and gender=#{t.gender}
             </if>
+            <if test="t.email != null and t.email != ''">
+                and #{t.email}
+            </if>
             <if test="t.phone != null">
                 and phone=#{t.phone}
             </if>
-            <if test="t.avatarurl != null">
+            <if test="t.avatarurl != null and t.avatarurl != ''">
                 and avatarUrl=#{t.avatarurl}
             </if>
-            <if test="t.country != null">
+            <if test="t.country != null and t.country != ''">
                 and country=#{t.country}
             </if>
-            <if test="t.province != null">
+            <if test="t.province != null and t.province != ''">
                 and province=#{t.province}
             </if>
-            <if test="t.city != null">
+            <if test="t.city != null and t.city != ''">
                 and city=#{t.city}
+            </if>
+            <if test="t.status != null">
+                and #{t.status}
+            </if>
+            <if test="t.createTime != null">
+                and #{t.createTime}
+            </if>
+            <if test="t.updateTime != null">
+                and #{t.updateTime}
+            </if>
+            <if test="t.lastLoginTime != null">
+                and #{t.lastLoginTime}
+            </if>
+            <if test="t.desc != null and t.desc != ''">
+                and #{t.desc}
             </if>
         </where>
     </sql>
 
     <select id="findOfList" resultMap="BaseResultMap">
         select * from t_user
-        <include refid="selectWhere"></include>
+        <include refid="selectWhere"/>
     </select>
 
     <select id="count" resultType="int">
         select * from t_user
-        <include refid="selectWhere"></include>
+        <include refid="selectWhere"/>
     </select>
 
     <select id="findOne" resultMap="BaseResultMap">
@@ -71,51 +95,77 @@
 
     <select id="findOne" resultMap="BaseResultMap">
         select * from t_user
-        <include refid="selectWhere"></include>
+        <include refid="selectWhere"/>
     </select>
 
     <insert id="addOne">
-        insert into t_user values (#{t.uId}, #{t.wxOpenid}, #{t.uAccount},
-      #{t.uPassword}, #{t.nickName}, #{t.gender},
-      #{t.phone}, #{t.avatarurl}, #{t.country},
-      #{t.province}, #{t.city}
+    insert into t_user (wx_openid, u_account,
+      u_password, nick_name, gender,
+      email, phone, avatarUrl,
+      country, province, city,
+      status, create_time, update_time,
+      last_login_time, `desc`)
+    values (#{wxOpenid,jdbcType=VARCHAR}, #{uAccount,jdbcType=VARCHAR},
+      #{uPassword,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT},
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR},
+      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateOne">
         update t_user
         <set>
-            <if test="wxOpenid != null">
+            <if test="t.wxOpenid != null and t.wxOpenid != ''">
                 wx_openid = #{t.wxOpenid},
             </if>
-            <if test="uAccount != null">
+            <if test="t.uAccount != null and t.uAccount != ''">
                 u_account = #{t.uAccount},
             </if>
-            <if test="uPassword != null">
+            <if test="t.uPassword != null and t.uPassword != ''">
                 u_password = #{t.uPassword},
             </if>
-            <if test="nickName != null">
+            <if test="t.nickName != null and t.nickName != ''">
                 nick_name = #{t.nickName},
             </if>
-            <if test="gender != null">
+            <if test="t.gender != null">
                 gender = #{t.gender},
             </if>
-            <if test="phone != null">
+            <if test="t.email != null and t.email != ''">
+                email = #{email},
+            </if>
+            <if test="t.phone != null and t.phone != ''">
                 phone = #{t.phone},
             </if>
-            <if test="avatarurl != null">
+            <if test="t.avatarurl != null and t.avatarurl != ''">
                 avatarUrl = #{t.avatarurl},
             </if>
-            <if test="country != null">
+            <if test="t.country != null and t.country != ''">
                 country = #{t.country},
             </if>
-            <if test="province != null">
+            <if test="t.province != null and t.province != ''">
                 province = #{t.province},
             </if>
-            <if test="city != null">
+            <if test="t.city != null and t.city != ''">
                 city = #{t.city},
             </if>
+            <if test="t.status != null">
+                status = #{status},
+            </if>
+            <if test="t.createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="t.updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="t.lastLoginTime != null">
+                last_login_time = #{lastLoginTime},
+            </if>
+            <if test="t.desc != null and t.desc != ''">
+                `desc` = #{desc},
+            </if>
         </set>
-        where u_id = #{uId,jdbcType=INTEGER}
+        where u_id = #{uId}
     </update>
 
 
