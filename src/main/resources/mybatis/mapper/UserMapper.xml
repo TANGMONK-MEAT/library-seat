@@ -132,7 +132,7 @@
                 gender = #{t.gender},
             </if>
             <if test="t.email != null and t.email != ''">
-                email = #{email},
+                email = #{t.email},
             </if>
             <if test="t.phone != null and t.phone != ''">
                 phone = #{t.phone},
@@ -150,22 +150,22 @@
                 city = #{t.city},
             </if>
             <if test="t.status != null">
-                status = #{status},
+                status = #{t.status},
             </if>
             <if test="t.createTime != null">
-                create_time = #{createTime},
+                create_time = #{t.createTime},
             </if>
             <if test="t.updateTime != null">
-                update_time = #{updateTime},
+                update_time = #{t.updateTime},
             </if>
             <if test="t.lastLoginTime != null">
-                last_login_time = #{lastLoginTime},
+                last_login_time = #{t.lastLoginTime},
             </if>
             <if test="t.desc != null and t.desc != ''">
-                `desc` = #{desc},
+                `desc` = #{t.desc},
             </if>
         </set>
-        where u_id = #{uId}
+        where u_id = #{t.uId}
     </update>
 
 
