@@ -2,6 +2,165 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.library.mapper.OrderMapper">
 
+    <resultMap id="BaseResultMap" type="com.github.library.entity.Order">
+        <id column="o_id" jdbcType="INTEGER" property="oId"/>
+        <result column="order_no" jdbcType="BIGINT" property="orderNo"/>
+        <result column="seat_id" jdbcType="INTEGER" property="seatId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="appoint _time" jdbcType="TIMESTAMP" property="appointTime"/>
+        <result column="sign_time" jdbcType="TIMESTAMP" property="signTime"/>
+        <result column="signback_time" jdbcType="TIMESTAMP" property="signbackTime"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    o_id, order_no, seat_id, user_id, "appoint _time", sign_time, signback_time, status
+  </sql>
 
+    <sql id="Base_Column_Where_Selective">
+        <where>
+            <if test="oId != null">
+                and #{oId,jdbcType=INTEGER}
+            </if>
+            <if test="orderNo != null">
+                and #{orderNo,jdbcType=BIGINT}
+            </if>
+            <if test="seatId != null">
+                and #{seatId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                and #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="appointTime != null">
+                and #{appointTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="signTime != null">
+                and #{signTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="signbackTime != null">
+                and #{signbackTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="status != null">
+                and #{status,jdbcType=TINYINT}
+            </if>
+            <if test="true">
+                or 1=0
+            </if>
+        </where>
+    </sql>
 
+    <select id="findOfList" parameterType="com.github.library.entity.Order" resultMap="BaseResultMap">
+        select * from t_order
+        <include refid="Base_Column_Where_Selective"/>
+    </select>
+
+    <select id="count" resultType="int" parameterType="com.github.library.entity.Order">
+        select count(*) from t_order
+        <include refid="Base_Column_Where_Selective"/>
+    </select>
+
+    <select id="findOne" parameterType="int" resultMap="BaseResultMap">
+        select * from t_order
+        where s_id=#{id}
+    </select>
+
+    <select id="findOneSelective" resultMap="BaseResultMap">
+        select * from t_order
+        <include refid="Base_Column_Where_Selective"/>
+    </select>
+
+    <sql id="Base_Column_if1_Selective">
+        <if test="oId != null">
+            o_id,
+        </if>
+        <if test="orderNo != null">
+            order_no,
+        </if>
+        <if test="seatId != null">
+            seat_id,
+        </if>
+        <if test="userId != null">
+            user_id,
+        </if>
+        <if test="appointTime != null">
+            "appoint _time",
+        </if>
+        <if test="signTime != null">
+            sign_time,
+        </if>
+        <if test="signbackTime != null">
+            signback_time,
+        </if>
+        <if test="status != null">
+            status,
+        </if>
+    </sql>
+
+    <sql id="Base_Column_if2_Selective">
+        <if test="oId != null">
+            #{oId,jdbcType=INTEGER},
+        </if>
+        <if test="orderNo != null">
+            #{orderNo,jdbcType=BIGINT},
+        </if>
+        <if test="seatId != null">
+            #{seatId,jdbcType=INTEGER},
+        </if>
+        <if test="userId != null">
+            #{userId,jdbcType=INTEGER},
+        </if>
+        <if test="appointTime != null">
+            #{appointTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="signTime != null">
+            #{signTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="signbackTime != null">
+            #{signbackTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="status != null">
+            #{status,jdbcType=TINYINT},
+        </if>
+    </sql>
+
+    <insert id="addOneSelective" parameterType="com.github.library.entity.Order">
+        insert into t_seat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if1_Selective"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if2_Selective"/>
+        </trim>
+    </insert>
+
+    <update id="updateOneSelective" parameterType="com.github.library.entity.Order">
+        update t_order
+        <set>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=BIGINT},
+            </if>
+            <if test="seatId != null">
+                seat_id = #{seatId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="appointTime != null">
+                "appoint _time" = #{appointTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="signTime != null">
+                sign_time = #{signTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="signbackTime != null">
+                signback_time = #{signbackTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+        </set>
+        where o_id = #{oId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteOne" parameterType="int">
+        delete from t_order where s_id=#{id}
+    </delete>
 </mapper>

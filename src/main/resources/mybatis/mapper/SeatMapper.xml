@@ -89,12 +89,12 @@
         <include refid="Base_Column_Where_Selective"/>
     </select>
 
-    <insert id="addOne" parameterType="com.github.library.entity.Seat">
-    insert into t_seat (floor, room, 
-      seat, status)
-    values (#{floor,jdbcType=INTEGER}, #{room,jdbcType=INTEGER}, 
-      #{seat,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
-  </insert>
+<!--    <insert id="addOne" parameterType="com.github.library.entity.Seat">-->
+<!--    insert into t_seat (floor, room, -->
+<!--      seat, status)-->
+<!--    values (#{floor,jdbcType=INTEGER}, #{room,jdbcType=INTEGER}, -->
+<!--      #{seat,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})-->
+<!--  </insert>-->
 
     <insert id="addOneSelective" parameterType="com.github.library.entity.Seat">
         insert into t_seat
@@ -106,14 +106,14 @@
         </trim>
     </insert>
 
-    <update id="updateOne" parameterType="com.github.library.entity.Seat">
-    update t_seat
-    set floor = #{floor,jdbcType=INTEGER},
-      room = #{room,jdbcType=INTEGER},
-      seat = #{seat,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
-    where s_id = #{sId,jdbcType=INTEGER}
-  </update>
+<!--    <update id="updateOne" parameterType="com.github.library.entity.Seat">-->
+<!--    update t_seat-->
+<!--    set floor = #{floor,jdbcType=INTEGER},-->
+<!--      room = #{room,jdbcType=INTEGER},-->
+<!--      seat = #{seat,jdbcType=INTEGER},-->
+<!--      status = #{status,jdbcType=INTEGER}-->
+<!--    where s_id = #{sId,jdbcType=INTEGER}-->
+<!--  </update>-->
 
     <update id="updateOneSelective" parameterType="com.github.library.entity.Seat">
         update t_seat

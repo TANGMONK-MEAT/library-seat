@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 29/11/2020 17:46:05
+ Date: 29/11/2020 20:53:31
 */
 
 SET NAMES utf8mb4;
@@ -274,7 +274,10 @@ DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role` (
   `user_id` int NOT NULL COMMENT '用户主键',
   `role_id` int NOT NULL COMMENT '角色主键',
-  PRIMARY KEY (`user_id`,`role_id`)
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `user_role_key1` (`role_id`),
+  CONSTRAINT `user_role_key1` FOREIGN KEY (`role_id`) REFERENCES `t_role` (`r_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_role_key2` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 
 -- ----------------------------
