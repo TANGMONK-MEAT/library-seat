@@ -23,5 +23,5 @@ spring:
     url: jdbc:mysql://localhost:3306/db_library_seat?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: 2950371251@qq.com
     platform: mysql
