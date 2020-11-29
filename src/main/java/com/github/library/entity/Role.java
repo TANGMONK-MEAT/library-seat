@@ -9,6 +9,8 @@ public class Role implements Serializable {
 
     private Integer rPower;
 
+    private String rDesc;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getrId() {
@@ -33,5 +35,13 @@ public class Role implements Serializable {
 
     public void setrPower(Integer rPower) {
         this.rPower = rPower;
+    }
+
+    public String getrDesc() {
+        return rDesc;
+    }
+
+    public void setrDesc(String rDesc) {
+        this.rDesc = rDesc == null ? null : rDesc.trim();
     }
 }
