@@ -43,7 +43,7 @@
                 and gender=#{t.gender}
             </if>
             <if test="t.email != null and t.email != ''">
-                and #{t.email}
+                and email=#{t.email}
             </if>
             <if test="t.phone != null">
                 and phone=#{t.phone}
