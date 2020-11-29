@@ -40,7 +40,7 @@ public interface BaseMapper<T> {
      * @param t
      * @return 记录
      */
-    T findOne(@Param("t") T t);
+    T findOneSelective(@Param("t") T t);
 
     /**
      * 添加一条记录
