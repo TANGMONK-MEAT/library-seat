@@ -81,4 +81,5 @@ public interface BaseMapper<T> {
      * @return 影响行数
      */
     int deleteOne(@Param("id") int id) throws Exception;
+
 }
