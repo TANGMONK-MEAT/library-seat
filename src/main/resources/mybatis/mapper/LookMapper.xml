@@ -1,7 +1,127 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.library.mapper.LookMapper">
+    <resultMap id="BaseResultMap" type="com.github.library.entity.Look">
+        <id column="lk_id" jdbcType="INTEGER" property="lkId" />
+        <result column="stu_no" jdbcType="INTEGER" property="stuNo" />
+        <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+        <result column="time" jdbcType="TIMESTAMP" property="time" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.github.library.entity.Look">
+        <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+    </resultMap>
 
+    <sql id="selectWhere">
+        <where>
+            <if test="lkId != null">
+                and lk_id = #{lkId}
+            </if>
+            <if test="stuNo != null">
+                and stu_no = #{stuNo,jdbcType=INTEGER}
+            </if>
+            <if test="stuName != null and stuName != ''">
+                and stu_name = #{stuName,jdbcType=VARCHAR}
+            </if>
+            <if test="time != null">
+                and time = #{time,jdbcType=TIMESTAMP}
+            </if>
+            <if test="detail != null">
+                and detail = #{detail,jdbcType=LONGVARCHAR}
+            </if>
+            <if test="true">
+                or 1=0
+            </if>
+        </where>
+    </sql>
 
+    <sql id="Base_Column_if1_Selective">
+        <if test="lkId != null">
+            lk_id,
+        </if>
+        <if test="stuNo != null">
+            stu_no,
+        </if>
+        <if test="stuName != null">
+            stu_name,
+        </if>
+        <if test="time != null">
+            time,
+        </if>
+        <if test="detail != null">
+            detail,
+        </if>
+    </sql>
+
+    <sql id="Base_Column_if2_Selective">
+        <if test="lkId != null">
+            #{lkId,jdbcType=INTEGER},
+        </if>
+        <if test="stuNo != null">
+            #{stuNo,jdbcType=INTEGER},
+        </if>
+        <if test="stuName != null">
+            #{stuName,jdbcType=VARCHAR},
+        </if>
+        <if test="time != null">
+            #{time,jdbcType=TIMESTAMP},
+        </if>
+        <if test="detail != null">
+            #{detail,jdbcType=LONGVARCHAR},
+        </if>
+    </sql>
+
+    <select id="findOfList" resultMap="ResultMapWithBLOBs">
+        select * from t_look
+        <include refid="selectWhere"/>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_look
+        <include refid="selectWhere"/>
+    </select>
+
+    <select id="findOne" resultMap="ResultMapWithBLOBs">
+        select * from t_look
+        where u_id=#{id}
+    </select>
+
+    <select id="findOneSelective" resultMap="ResultMapWithBLOBs">
+        select * from t_look
+        <include refid="selectWhere"/>
+    </select>
+
+    <insert id="addOneSelective" parameterType="com.github.library.entity.Seat">
+        insert into t_look
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if1_Selective"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if2_Selective"/>
+        </trim>
+    </insert>
+
+    <update id="updateOneSelective" parameterType="com.github.library.entity.Seat">
+        update t_look
+        <set>
+            <if test="stuNo != null">
+                stu_no = #{stuNo,jdbcType=INTEGER},
+            </if>
+            <if test="stuName != null">
+                stu_name = #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="detail != null">
+                detail = #{detail,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where lk_id = #{lkId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteOne" parameterType="int">
+        delete from t_look
+        where lk_id = #{lkId,jdbcType=INTEGER}
+    </delete>
 
 </mapper>

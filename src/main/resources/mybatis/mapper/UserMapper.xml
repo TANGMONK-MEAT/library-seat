@@ -75,7 +75,118 @@
             <if test="desc != null and desc != ''">
                 and `desc`=#{desc}
             </if>
+            <if test="true">
+                or 1=0
+            </if>
         </where>
+    </sql>
+
+    <sql id="Base_Column_if1_Selective">
+        <if test="uId != null">
+            u_id,
+        </if>
+        <if test="wxOpenid != null">
+            wx_openid,
+        </if>
+        <if test="uAccount != null">
+            u_account,
+        </if>
+        <if test="uPassword != null">
+            u_password,
+        </if>
+        <if test="nickName != null">
+            nick_name,
+        </if>
+        <if test="gender != null">
+            gender,
+        </if>
+        <if test="email != null">
+            email,
+        </if>
+        <if test="phone != null">
+            phone,
+        </if>
+        <if test="avatarurl != null">
+            avatarUrl,
+        </if>
+        <if test="country != null">
+            country,
+        </if>
+        <if test="province != null">
+            province,
+        </if>
+        <if test="city != null">
+            city,
+        </if>
+        <if test="status != null">
+            status,
+        </if>
+        <if test="createTime != null">
+            create_time,
+        </if>
+        <if test="updateTime != null">
+            update_time,
+        </if>
+        <if test="lastLoginTime != null">
+            last_login_time,
+        </if>
+        <if test="desc != null">
+            desc,
+        </if>
+    </sql>
+
+    <sql id="Base_Column_if2_Selective">
+        <if test="uId != null">
+            #{uId,jdbcType=INTEGER},
+        </if>
+        <if test="wxOpenid != null">
+            #{wxOpenid,jdbcType=VARCHAR},
+        </if>
+        <if test="uAccount != null">
+            #{uAccount,jdbcType=VARCHAR},
+        </if>
+        <if test="uPassword != null">
+            #{uPassword,jdbcType=VARCHAR},
+        </if>
+        <if test="nickName != null">
+            #{nickName,jdbcType=VARCHAR},
+        </if>
+        <if test="gender != null">
+            #{gender,jdbcType=TINYINT},
+        </if>
+        <if test="email != null">
+            #{email,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="avatarurl != null">
+            #{avatarurl,jdbcType=VARCHAR},
+        </if>
+        <if test="country != null">
+            #{country,jdbcType=VARCHAR},
+        </if>
+        <if test="province != null">
+            #{province,jdbcType=VARCHAR},
+        </if>
+        <if test="city != null">
+            #{city,jdbcType=VARCHAR},
+        </if>
+        <if test="status != null">
+            #{status,jdbcType=TINYINT},
+        </if>
+        <if test="createTime != null">
+            #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateTime != null">
+            #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="lastLoginTime != null">
+            #{lastLoginTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="desc != null">
+            #{desc,jdbcType=VARCHAR},
+        </if>
     </sql>
 
     <select id="findOfList" resultMap="BaseResultMap">
@@ -98,22 +209,34 @@
         <include refid="selectWhere"/>
     </select>
 
-    <insert id="addOne">
-    insert into t_user (wx_openid, u_account,
-      u_password, nick_name, gender,
-      email, phone, avatarUrl,
-      country, province, city,
-      status, create_time, update_time,
-      last_login_time, `desc`)
-    values (#{wxOpenid,jdbcType=VARCHAR}, #{uAccount,jdbcType=VARCHAR},
-      #{uPassword,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT},
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR},
-      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
-      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR})
+<!--    <insert id="addOne">-->
+<!--    insert into t_user (wx_openid, u_account,-->
+<!--      u_password, nick_name, gender,-->
+<!--      email, phone, avatarUrl,-->
+<!--      country, province, city,-->
+<!--      status, create_time, update_time,-->
+<!--      last_login_time, `desc`)-->
+<!--    values (#{wxOpenid,jdbcType=VARCHAR}, #{uAccount,jdbcType=VARCHAR},-->
+<!--      #{uPassword,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT},-->
+<!--      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR},-->
+<!--      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},-->
+<!--      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},-->
+<!--      #{lastLoginTime,jdbcType=TIMESTAMP}, #{desc,jdbcType=VARCHAR})-->
+<!--    </insert>-->
+
+
+
+    <insert id="addOneSelective">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if1_Selective"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if2_Selective"/>
+        </trim>
     </insert>
 
-    <update id="updateOne">
+    <update id="updateOneSelective">
         update t_user
         <set>
             <if test="wxOpenid != null and wxOpenid != ''">
@@ -168,5 +291,13 @@
         where u_id = #{uId}
     </update>
 
+    <delete id="deleteOne" parameterType="int">
+        delete from t_user where u_id=#{id}
+    </delete>
+
+
+    <select id="findByAccount">
+        select * from t_user where u_account=#{account}
+    </select>
 
 </mapper>
