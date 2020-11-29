@@ -8,11 +8,17 @@
         <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
         <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
         <result column="gender" jdbcType="TINYINT" property="gender" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
         <result column="country" jdbcType="VARCHAR" property="country" />
         <result column="province" jdbcType="VARCHAR" property="province" />
         <result column="city" jdbcType="VARCHAR" property="city" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
     </resultMap>
 
 
@@ -51,6 +57,22 @@
             <if test="t.city != null">
                 and city=#{t.city}
             </if>
+
+            <if test="t.status != null">
+                and status=#{t.status}
+            </if>
+            <if test="t.createTime != null">
+                and create_time=#{t.createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time=#{t.updateTime}
+            </if>
+            <if test="lastLoginTime != null">
+                and last_login_time=#{t.lastLoginTime}
+            </if>
+            <if test="desc != null">
+                and `desc`=#{t.desc}
+            </if>
         </where>
     </sql>
 
@@ -64,10 +86,7 @@
         <include refid="selectWhere"></include>
     </select>
 
-    <select id="findOne" resultMap="BaseResultMap">
-        select * from t_user
-        where u_id=#{id}
-    </select>
+
 
     <select id="findOne" resultMap="BaseResultMap">
         select * from t_user
@@ -78,7 +97,8 @@
         insert into t_user values (#{t.uId}, #{t.wxOpenid}, #{t.uAccount},
       #{t.uPassword}, #{t.nickName}, #{t.gender},
       #{t.phone}, #{t.avatarurl}, #{t.country},
-      #{t.province}, #{t.city}
+      #{t.province}, #{t.city},#{t.status},#{t.createTime},#{t.updateTime},#{t.lastLoginTime},
+      #{t.desc}
     </insert>
 
     <update id="updateOne">
