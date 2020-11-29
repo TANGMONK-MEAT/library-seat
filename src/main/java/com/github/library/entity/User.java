@@ -1,6 +1,7 @@
 package com.github.library.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private Integer uId;
@@ -15,6 +16,8 @@ public class User implements Serializable {
 
     private Byte gender;
 
+    private String email;
+
     private String phone;
 
     private String avatarurl;
@@ -25,7 +28,15 @@ public class User implements Serializable {
 
     private String city;
 
-    private Integer uType;
+    private Byte status;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Date lastLoginTime;
+
+    private String desc;
 
     private static final long serialVersionUID = 1L;
 
@@ -77,6 +88,14 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -117,11 +136,43 @@ public class User implements Serializable {
         this.city = city == null ? null : city.trim();
     }
 
-    public Integer getuType() {
-        return uType;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setuType(Integer uType) {
-        this.uType = uType;
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc == null ? null : desc.trim();
     }
 }

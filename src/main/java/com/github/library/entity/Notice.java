@@ -10,6 +10,8 @@ public class Notice implements Serializable {
 
     private Date time;
 
+    private Integer userId;
+
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -36,6 +38,14 @@ public class Notice implements Serializable {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getContent() {
