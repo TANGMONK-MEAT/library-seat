@@ -14,5 +14,5 @@ public interface IllegalMapper<T> {
      * @param studentNo 学号
      * @return 影响行数
      */
-    int deleteOne(@Param("no") String studentNo);
+    int deleteOneByStudentNo(@Param("no") String studentNo);
 }
