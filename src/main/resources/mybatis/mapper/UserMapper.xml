@@ -2,33 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.library.mapper.UserMapper">
     <resultMap id="BaseResultMap" type="com.github.library.entity.User">
-        <id column="u_id" jdbcType="INTEGER" property="uId" />
-        <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
-        <result column="u_account" jdbcType="VARCHAR" property="uAccount" />
-        <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
-        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-        <result column="gender" jdbcType="TINYINT" property="gender" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="phone" jdbcType="VARCHAR" property="phone" />
-        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl" />
-        <result column="country" jdbcType="VARCHAR" property="country" />
-        <result column="province" jdbcType="VARCHAR" property="province" />
-        <result column="city" jdbcType="VARCHAR" property="city" />
-        <result column="status" jdbcType="TINYINT" property="status" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
-        <result column="desc" jdbcType="VARCHAR" property="desc" />
+        <id column="u_id" jdbcType="INTEGER" property="uId"/>
+        <result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid"/>
+        <result column="u_account" jdbcType="VARCHAR" property="uAccount"/>
+        <result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarurl"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="desc" jdbcType="VARCHAR" property="desc"/>
     </resultMap>
 
 
     <sql id="selectWhere">
         <where>
             <if test="uId != null">
-                and u_id = #{uId}
+                and u_id=#{uId}
             </if>
             <if test="wxOpenid != null and wxOpenid != ''">
-                and wx_openid =#{wxOpenid}
+                and wx_openid=#{wxOpenid}
             </if>
             <if test="uAccount != null and uAccount != ''">
                 and u_account=#{uAccount}
@@ -43,7 +43,7 @@
                 and gender=#{gender}
             </if>
             <if test="email != null and email != ''">
-                and #{email}
+                and email=#{email}
             </if>
             <if test="phone != null">
                 and phone=#{phone}
@@ -61,19 +61,19 @@
                 and city=#{city}
             </if>
             <if test="status != null">
-                and #{status}
+                and status=#{status}
             </if>
             <if test="createTime != null">
-                and #{createTime}
+                and create_time=#{createTime}
             </if>
             <if test="updateTime != null">
-                and #{updateTime}
+                and update_time=#{updateTime}
             </if>
             <if test="lastLoginTime != null">
-                and #{lastLoginTime}
+                and last_login_time=#{lastLoginTime}
             </if>
             <if test="desc != null and desc != ''">
-                and #{desc}
+                and `desc`=#{desc}
             </if>
         </where>
     </sql>
@@ -167,9 +167,6 @@
         </set>
         where u_id = #{uId}
     </update>
-
-
-
 
 
 </mapper>
