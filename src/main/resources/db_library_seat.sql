@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 28/11/2020 21:55:51
+ Date: 29/11/2020 11:49:55
 */
 
 SET NAMES utf8mb4;
@@ -114,7 +114,10 @@ CREATE TABLE `t_notice` (
   `title` varchar(255) NOT NULL COMMENT '通知标题',
   `content` text NOT NULL COMMENT '内容',
   `time` datetime NOT NULL COMMENT '发表时间',
-  PRIMARY KEY (`n_id`)
+  `user_id` int NOT NULL COMMENT '管理员id',
+  PRIMARY KEY (`n_id`),
+  KEY `notice_user_key` (`user_id`),
+  CONSTRAINT `notice_user_key` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统通知表';
 
 -- ----------------------------
@@ -177,6 +180,7 @@ CREATE TABLE `t_role` (
   `r_id` int NOT NULL AUTO_INCREMENT COMMENT '主键自增',
   `r_name` varchar(20) NOT NULL COMMENT '角色名',
   `r_power` int NOT NULL COMMENT '1-学生-001（1）\n2-管理员-011（3）\n3-授权管理员-111（7）',
+  `r_desc` varchar(100) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`r_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
@@ -184,9 +188,9 @@ CREATE TABLE `t_role` (
 -- Records of t_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_role` VALUES (1, '学生', 1);
-INSERT INTO `t_role` VALUES (2, '管理员', 3);
-INSERT INTO `t_role` VALUES (3, '授权管理员', 7);
+INSERT INTO `t_role` VALUES (1, '用户', 1, '普通用户权限');
+INSERT INTO `t_role` VALUES (2, '管理员', 3, '拥有操作用户的权限');
+INSERT INTO `t_role` VALUES (3, '授权管理员', 7, '授权管理员，拥有所有操作权限，可以设置管理员，和授权');
 COMMIT;
 
 -- ----------------------------
@@ -235,26 +239,46 @@ COMMIT;
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `u_id` int NOT NULL AUTO_INCREMENT COMMENT '主键自增',
-  `wx_openid` varchar(32) DEFAULT NULL COMMENT '微信openid',
-  `u_account` varchar(50) DEFAULT NULL COMMENT '学号/教职工工号',
-  `u_password` varchar(50) DEFAULT NULL COMMENT '密码',
+  `wx_openid` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '微信openid',
+  `u_account` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学号',
+  `u_password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `nick_name` varchar(32) DEFAULT NULL COMMENT '微信昵称',
-  `gender` tinyint DEFAULT NULL COMMENT '性别，0-女；1-男',
-  `phone` varchar(20) DEFAULT NULL COMMENT '电话号码',
-  `avatarUrl` varchar(255) DEFAULT NULL COMMENT '头像链接',
+  `gender` tinyint DEFAULT NULL COMMENT '性别，0-女；1-男；2-保密',
+  `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '邮箱',
+  `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '联系电话',
+  `avatarUrl` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '头像链接',
   `country` varchar(20) DEFAULT NULL COMMENT '国家',
   `province` varchar(20) DEFAULT NULL COMMENT '省份',
   `city` varchar(30) DEFAULT NULL COMMENT '城市名',
-  `u_type` int DEFAULT NULL COMMENT '用户类型',
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '状态，0-锁定；1-正常',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `last_login_time` datetime DEFAULT NULL COMMENT '最近登录时间',
+  `desc` varchar(100) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`u_id`),
-  UNIQUE KEY `user_openid` (`wx_openid`) COMMENT '微信用户的唯一标识',
   UNIQUE KEY `user_account` (`u_account`) COMMENT '账号唯一',
-  KEY `user_role_key` (`u_type`),
-  CONSTRAINT `user_role_key` FOREIGN KEY (`u_type`) REFERENCES `t_role` (`r_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `user_openid` (`wx_openid`) USING BTREE COMMENT '微信用户的唯一',
+  UNIQUE KEY `user_phone` (`phone`) USING BTREE COMMENT '电话号码唯一'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 -- ----------------------------
 -- Records of t_user
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `t_user_role`;
+CREATE TABLE `t_user_role` (
+  `user_id` int NOT NULL COMMENT '用户主键',
+  `role_id` int NOT NULL COMMENT '角色主键',
+  PRIMARY KEY (`user_id`,`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
+
+-- ----------------------------
+-- Records of t_user_role
 -- ----------------------------
 BEGIN;
 COMMIT;
