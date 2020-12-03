@@ -6,6 +6,17 @@
 #### 软件架构
 软件架构说明
 
+# 从暂存区中删除文件。但是本地文件还存在， 只是不希望这个文件被版本控制
+> git rm --cached
+
+```
+对于已经处在版本管理中的文件，如果要忽略修改而不被提交到仓库中，需要删除缓存信息
+0. update .gitignore
+1.git rm -r --cached src/main/resource/application.yml
+2.git add .
+3.git commit -m "update gitignore"
+```
+
 
 #### 安装教程
 
