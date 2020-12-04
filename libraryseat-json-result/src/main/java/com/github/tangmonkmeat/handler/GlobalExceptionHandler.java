@@ -46,6 +46,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
     @ExceptionHandler(ShiroException.class)
     public ResponseEntity<Object> handleShiroException(ShiroException ex, WebRequest request) {
         logger.error("shiro exception, {}", request, ex);
+        Throwable cause = ex.getCause();
+        if (cause instanceof BusinessException){
+            BusinessException bcase = (BusinessException) cause;
+            return handleExceptionInternal(bcase,Result.failure(bcase.getStatus()),HttpStatus.BAD_REQUEST,request);
+        }
         if (ex instanceof UnauthorizedException){
             return handleExceptionInternal(ex,Result.failure(ResultEnum.PERMISSION_UNAUTHORISE),HttpStatus.UNAUTHORIZED,request);
         }

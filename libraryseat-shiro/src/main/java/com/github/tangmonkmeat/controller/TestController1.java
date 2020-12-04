@@ -5,13 +5,13 @@ import com.github.tangmonkmeat.common.constant.JwtConstant;
 import com.github.tangmonkmeat.config.shiro.JwtToken;
 import com.github.tangmonkmeat.config.shiro.UserRealm;
 import com.github.tangmonkmeat.entity.User;
+import com.github.tangmonkmeat.helper.ShiroAuthorizationHelper;
 import com.github.tangmonkmeat.result.Result;
 import com.github.tangmonkmeat.utils.JwtUtil;
 import com.github.tangmonkmeat.utils.Md5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,8 +74,7 @@ public class TestController1 {
         map.put(JwtConstant.RESPONSE_AUTH_KEY, token);
         map.put("mssage","clear");
         // 清理权限缓存
-        PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
-        userRealm.clearCache(principals);
+        ShiroAuthorizationHelper.clearAuthorizationInfo();
         return Result.success(map);
     }
 }

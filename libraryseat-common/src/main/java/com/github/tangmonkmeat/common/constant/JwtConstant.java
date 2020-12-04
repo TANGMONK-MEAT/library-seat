@@ -29,4 +29,10 @@ public class JwtConstant {
      */
     public static final String RESPONSE_AUTH_KEY = "token";
 
+    /**
+     * jwt 加密的盐的个数
+     *
+     */
+    public static final int DEFAULT_SALT_SIZE = 8;
+
 }

@@ -79,7 +79,7 @@ public class UserRealm extends AuthorizingRealm {
         String token = (String) authenticationToken.getPrincipal();
         String userName = JwtUtil.getUserName(token);
         if (userName == null) {
-            throw new BusinessException(ResultEnum.PARAM_NOT_COMPLETE);
+            throw new AuthenticationException(new BusinessException(ResultEnum.PARAM_NOT_COMPLETE));
         }
 
         // 查询 user
@@ -91,7 +91,7 @@ public class UserRealm extends AuthorizingRealm {
             // 查询数据库
             user = shiroUserService.getUserWithRoleAndPower(userName);
             if (user == null) {
-                throw new BusinessException(ResultEnum.USER_NOT_EXIST);
+                throw new AuthenticationException(new BusinessException(ResultEnum.USER_NOT_EXIST));
             }
         }else{
             user = (User) obj;
@@ -99,7 +99,7 @@ public class UserRealm extends AuthorizingRealm {
 
         // 判断 token 是否过期
         if (JwtUtil.isExpire(token)) {
-            throw new BusinessException(ResultEnum.PERMISSION_TOKEN_EXPIRED);
+            throw new AuthenticationException(new BusinessException(ResultEnum.PERMISSION_TOKEN_EXPIRED));
         }
 
         // 校验token
@@ -107,19 +107,9 @@ public class UserRealm extends AuthorizingRealm {
         String secret = Md5Util.md5Encryption(user.getuPassword(), user.getSalt());
         //String secret = Md5Util.md5Encryption(user.getuPassword(), "aaaa");
         if (!JwtUtil.verify(token,userName,secret)){
-            throw new BusinessException(ResultEnum.PERMISSION_TOKEN_INVALID);
+            throw new AuthenticationException(new BusinessException(ResultEnum.PERMISSION_TOKEN_INVALID));
         }
 
         return new SimpleAuthenticationInfo(user,token,getName());
-    }
-
-    /**
-     * 清理 用户的权限缓存信息
-     *
-     * @param principals {@link PrincipalCollection}
-     */
-    @Override
-    public void clearCache(PrincipalCollection principals) {
-        super.clearCache(principals);
     }
 }
