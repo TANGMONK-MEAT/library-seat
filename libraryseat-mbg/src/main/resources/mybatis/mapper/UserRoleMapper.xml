@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.tangmonkmeat.mapper.UserRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.github.tangmonkmeat.entity.UserRole">
+        <id column="ur_id" jdbcType="INTEGER" property="urId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    </resultMap>
+
+
+    <sql id="selectWhere">
+        <where>
+            <if test="urId != null">
+                and ur_id=#{urId}
+            </if>
+            <if test="userId != null">
+                and user_id=#{userId}
+            </if>
+            <if test="roleId != null">
+                and role_id=#{roleId}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_if1_Selective">
+        <if test="urId != null">
+            ur_id,
+        </if>
+        <if test="userId != null">
+            user_id,
+        </if>
+        <if test="roleId != null">
+            role_id,
+        </if>
+    </sql>
+
+    <sql id="Base_Column_if2_Selective">
+        <if test="urId != null">
+            #{urId,jdbcType=INTEGER},
+        </if>
+        <if test="userId != null">
+            #{userId,jdbcType=INTEGER},
+        </if>
+        <if test="roleId != null">
+            #{roleId,jdbcType=INTEGER},
+        </if>
+    </sql>
+
+    <select id="findOfList" resultMap="BaseResultMap">
+        select * from t_user_role
+        <include refid="selectWhere"/>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from t_user_role
+        <include refid="selectWhere"/>
+    </select>
+
+    <select id="findOne" resultMap="BaseResultMap">
+        select * from t_user_role
+        where r_id=#{rId}
+    </select>
+
+    <select id="findOneSelective" resultMap="BaseResultMap">
+        select * from t_user_role
+        <include refid="selectWhere"/>
+    </select>
+
+
+    <insert id="addOneSelective">
+        insert into t_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if1_Selective"/>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Base_Column_if2_Selective"/>
+        </trim>
+    </insert>
+
+    <update id="updateOneSelective" parameterType="com.github.tangmonkmeat.entity.UserRole">
+        update t_user_role
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where ur_id = #{urId,jdbcType=INTEGER}
+    </update>
+
+
+    <delete id="deleteOne" parameterType="int">
+        delete from t_user_role
+        where ur_id = #{id}
+    </delete>
+
+</mapper>
