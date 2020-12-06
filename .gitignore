@@ -34,5 +34,3 @@ build/
 
 ### 排除 ###
 logs/
-src/main/resources/application.yml
-src/main/resources/logback-spring.xml

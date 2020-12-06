@@ -9,7 +9,6 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.serializer.RedisSerializer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -23,20 +22,6 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @Configuration
 public class ShiroConfig {
 
-    @Value("${spring.redis.password}")
-    private String password;
-
-    @Value("${spring.redis.host}")
-    private String host;
-
-    @Value("${spring.redis.port}")
-    private String port;
-
-    @Value("${spring.redis.database}")
-    private int database;
-
-    @Value("${spring.redis.timeout}")
-    private int timeout;
 
     /**
      * 注册 UserRealm, 用于用户的认证和授权
@@ -55,10 +40,10 @@ public class ShiroConfig {
     @Bean
     public RedisManager redisManager(){
         RedisManager redisManager = new RedisManager();
-        redisManager.setDatabase(database);
-        redisManager.setHost(host + ":" + port);
-        redisManager.setPassword(password);
-        redisManager.setTimeout(timeout);
+        redisManager.setDatabase(1);
+        //redisManager.setHost("127.0.0.1:6379");
+        redisManager.setPassword("2950371251@qq.com");
+        //redisManager.setTimeout();
         return redisManager;
     }
 
