@@ -1,7 +1,10 @@
 # librarySeat
 
+<<<<<<< HEAD
 # h
 
+=======
+>>>>>>> parent of 2f347c7... update README.md.
 #### 介绍
 校园图书馆座位预定小程序
 
