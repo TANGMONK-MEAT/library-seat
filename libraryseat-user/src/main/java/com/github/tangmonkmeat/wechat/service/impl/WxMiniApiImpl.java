@@ -29,8 +29,8 @@ public class WxMiniApiImpl implements WxMiniApi {
      * auth.code2Session
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html
      * 请求参数   属性	     类型	   默认值	必填	 说明
-     * @param   appId	     string		         是	   小程序 appId
-     * @param   secret	     string		         是	   小程序 appSecret
+     * //@param   appId	     string		         是	   小程序 appId
+     * //@param   secret	     string		         是	   小程序 appSecret
      * @param   jsCode	     string		         是	   登录时获取的 code
      *          grantType	 string		         是	   授权类型，此处只需填写 authorization_code
      * 返回值

@@ -44,5 +44,5 @@ public interface UserService {
      *          <p>tom_time</p>
      * @return {@link IntergrityAndTimeVO}
      */
-    IntergrityAndTimeVO getIntergrityAndTime();
+    IntergrityAndTimeVO getIntergrityAndTime(String account);
 }
