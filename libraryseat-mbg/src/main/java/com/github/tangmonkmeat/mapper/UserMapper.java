@@ -19,6 +19,14 @@ public interface UserMapper<T> extends BaseMapper<T>{
     T findByAccount(@Param("account") String account);
 
     /**
+     * 通过微信唯一标识，查找用户
+     *
+     * @param openid 账户
+     * @return 用户详情
+     */
+    T findUserByOpenid(@Param("openid") String openid);
+
+    /**
      * 通过用户名，查找用户所有的 资源权限
      *
      * @param id 账户

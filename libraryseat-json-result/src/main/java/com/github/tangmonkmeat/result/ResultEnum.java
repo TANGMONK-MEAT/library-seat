@@ -26,6 +26,7 @@ public enum ResultEnum {
     USER_NOT_EXIST(20004, "用户不存在"),
     USER_HAS_EXISTED(20005, "用户已存在"),
     USER_PASSWORD_ERROR_GREATER_THAN_MAX_TIMES(20006,"由于密码输入错误次数过多，帐号已经禁止登录！"),
+    USER_LOGIN_DATABASE_ERROR(20007,"用户登录错误"),
 
     /* 业务错误：30001-39999 */
     BUSINESS_GROUP_NO_ALLOWED_DEL(30001, "应用分组已经被应用使用，不能删除"),
@@ -68,6 +69,8 @@ public enum ResultEnum {
     INTERFACE_ADDRESS_INVALID(60004, "接口地址无效"),
     INTERFACE_REQUEST_TIMEOUT(60005, "接口请求超时"),
     INTERFACE_EXCEED_LOAD(60006, "接口负载过高"),
+    INTERFACE_WX_CODE2SESSION_ERROR(60007,"调用微信端授权认证接口错误"),
+    INTERFACE_WX_CODE_ERROR(60008,"调用微信端授权认证接口错误, 指定的code 错误或不存在"),
 
 
     /* 权限错误：70001-79999 */

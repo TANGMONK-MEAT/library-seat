@@ -56,7 +56,7 @@ public interface BaseMapper<T> {
      * @param t
      * @return 影响行数
      */
-    int addOneSelective(T t) throws Exception;
+    int addOneSelective(T t);
 
 //    /**
 //     * 修改一条记录
@@ -72,7 +72,7 @@ public interface BaseMapper<T> {
      * @param t
      * @return 影响行数
      */
-    int updateOneSelective(T t) throws Exception;
+    int updateOneSelective(T t);
 
     /**
      * 删除一条记录

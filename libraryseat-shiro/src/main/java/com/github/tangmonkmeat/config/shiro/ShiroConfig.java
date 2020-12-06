@@ -8,8 +8,10 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.serializer.RedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 /**
  * shiro 配置类
@@ -60,7 +62,6 @@ public class ShiroConfig {
         redisCacheManager.setPrincipalIdFieldName(RedisConstant.SHIRO_KEY_PREFIX_VALUE);
         redisCacheManager.setExpire(RedisConstant.SHIRO_KEY_EXPIRE_TIME);
         redisCacheManager.setKeyPrefix(RedisConstant.SHIRO_CACHE_KEY_PREFIX);
-
         return redisCacheManager;
     }
 

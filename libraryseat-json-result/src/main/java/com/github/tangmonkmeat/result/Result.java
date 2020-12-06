@@ -72,8 +72,8 @@ public class Result<T> {
     /**
      * 业务成功返回业务代码和描述信息
      */
-    public static Result<Void> success() {
-        return new Result<Void>(ResultEnum.SUCCESS, null);
+    public static Result<Object> success() {
+        return new Result<Object>(ResultEnum.SUCCESS, null);
     }
 
     /**

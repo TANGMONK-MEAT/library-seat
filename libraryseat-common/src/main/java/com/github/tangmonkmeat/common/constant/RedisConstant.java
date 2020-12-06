@@ -48,8 +48,38 @@ public class RedisConstant {
      */
     public final static String SHIRO_AUTHORIZATION_CACHE_CLASS_NAME = "com.github.tangmonkmeat.config.shiro.UserRealm.authorizationCache";
 
+    /**
+     * shiro 缓存用户权限信息的key
+     *
+     */
+    public final static String SHIRO_AUTHORIZATION_KEY = SHIRO_CACHE_KEY_PREFIX + SHIRO_AUTHORIZATION_CACHE_CLASS_NAME + ":";
+
 
     // ============================== 用户相关 ==========================================
+
+    /**
+     * 用户信息
+     *
+     */
+    public final static String USER_LOGIN_MESSAGE = USER_KEY + "message:";
+
+    /**
+     * 用户信息过期时间，单位小时，默认6小时
+     *
+     */
+    public final static int USER_LOGIN_MESSAGE_EXPIRE = 6;
+
+    /**
+     * 用户登录的 ip
+     *
+     */
+    public final static String USER_LOGIN_IP = USER_KEY + "login_ip:";
+
+    /**
+     * 用户登录ip 的过期时间, 单位小时，默认 6小时
+     *
+     */
+    public final static int USER_LOGIN_IP_EXPIRE = USER_LOGIN_MESSAGE_EXPIRE;
 
     /**
      * 用户 在限定时间内登陆的次数 的key，value必须是 正整数

@@ -342,5 +342,8 @@
             u.u_id = ur.ur_id
             AND u.u_id = #{id})
     </select>
+    <select id="findUserByOpenid" parameterType="string" resultMap="BaseResultMap">
+        select * from t_user where wx_openid=#{openid}
+    </select>
 
 </mapper>

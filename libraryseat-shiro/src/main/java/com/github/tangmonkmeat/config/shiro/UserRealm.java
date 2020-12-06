@@ -66,8 +66,8 @@ public class UserRealm extends AuthorizingRealm {
         if (!ObjectUtils.isEmpty(roleList)){
             authorizationInfo.addRoles(roleList);
         }
-        //authorizationInfo.addRole("admin");
-        //authorizationInfo.addStringPermission("user:*");
+        authorizationInfo.addRole("admin");
+        authorizationInfo.addStringPermission("user:*");
         return authorizationInfo;
     }
 
@@ -104,11 +104,11 @@ public class UserRealm extends AuthorizingRealm {
 
         // 校验token
         // 由 密码 + salt + 996散列次数 md5 加密 生成 secret
-        String secret = Md5Util.md5Encryption(user.getuPassword(), user.getSalt());
+        //String secret = Md5Util.md5Encryption(user.getuPassword(), user.getSalt());
         //String secret = Md5Util.md5Encryption(user.getuPassword(), "aaaa");
-        if (!JwtUtil.verify(token,userName,secret)){
-            throw new AuthenticationException(new BusinessException(ResultEnum.PERMISSION_TOKEN_INVALID));
-        }
+        //if (!JwtUtil.verify(token,userName,secret)){
+        //    throw new AuthenticationException(new BusinessException(ResultEnum.PERMISSION_TOKEN_INVALID));
+        //}
 
         return new SimpleAuthenticationInfo(user,token,getName());
     }

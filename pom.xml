@@ -20,6 +20,8 @@
         <module>libraryseat-shiro</module>
         <module>libraryseat-json-result</module>
         <module>libraryseat-mbg</module>
+        <module>libraryseat-user</module>
+        <module>libraryseat-order</module>
     </modules>
 
     <properties>
@@ -34,11 +36,26 @@
         <jwt.version>3.10.3</jwt.version>
         <shiro.verison>1.7.0</shiro.verison>
         <shiro-redis.version>3.3.1</shiro-redis.version>
+        <bouncycastle.version>1.57</bouncycastle.version>
+        <fastjson.version>1.2.58</fastjson.version>
     </properties>
 
     <dependencyManagement>
 
         <dependencies>
+
+            <!-- 哈希算法和加密算法的第三方库-->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.crazycake</groupId>
