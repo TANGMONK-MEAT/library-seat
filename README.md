@@ -1,6 +1,6 @@
 # librarySeat
 
-# hello
+# h
 
 #### 介绍
 校园图书馆座位预定小程序
