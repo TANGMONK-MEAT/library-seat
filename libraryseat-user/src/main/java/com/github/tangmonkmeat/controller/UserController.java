@@ -78,10 +78,10 @@ public class UserController {
     @GetMapping(value = "/integrity")
     public Result<Map<String,Object>> getIntegrityValues(HttpServletRequest request){
         String token = request.getHeader(JwtConstant.AUTH_HEADER_KEY);
-        IntergrityAndTimeVO intergrityAndTimeVO = userService.getIntergrityAndTime();
+        String userName = JwtUtil.getUserName(token);
+        IntergrityAndTimeVO intergrityAndTimeVO = userService.getIntergrityAndTime(userName);
 
         // 刷新 token
-        String userName = JwtUtil.getUserName(token);
         User user = (User)redisUtil.get(RedisConstant.USER_KEY + userName);
         String password = user.getuPassword();
         String salt = user.getSalt();
