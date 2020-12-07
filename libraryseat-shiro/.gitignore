@@ -34,3 +34,4 @@ build/
 
 ### 排除 ###
 logs/
+src/main/resources/application.yml
