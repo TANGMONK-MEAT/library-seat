@@ -3,6 +3,7 @@ package com.github.tangmonkmeat.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.github.tangmonkmeat.common.constant.JwtConstant;
 import com.github.tangmonkmeat.common.constant.RedisConstant;
+import com.github.tangmonkmeat.common.constant.ResultConstant;
 import com.github.tangmonkmeat.common.constant.WeChatConstant;
 import com.github.tangmonkmeat.common.enums.Lock;
 import com.github.tangmonkmeat.entity.User;
@@ -66,11 +67,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
     public Result<Map<String,Object>> login(LoginUserVO loginUser,String ip) {
-        if (loginUser.getUsername() == null || loginUser.getPassword() == null) {
+        if (loginUser.getUsername() == null || loginUser.getPassword() == null || loginUser.getOpenid() == null) {
             throw new BusinessException(ResultEnum.PARAM_NOT_COMPLETE);
         }
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
+        String openid = loginUser.getOpenid();
 
         final String keyCount = RedisConstant.USER_LOGIN_COUNT + username;
         // 超过限定时间登录，重新计数
@@ -94,7 +96,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 判断用户是否存在
-        User user = userMapper.findByAccount(username);
+        User user = userMapper.findOneSelective(new User(username,openid));
         if (user == null) {
             throw new BusinessException(ResultEnum.USER_NOT_EXIST);
         }
@@ -121,6 +123,7 @@ public class UserServiceImpl implements UserService {
         sysUser.setSalt(salt);
         Date date = new Date();
         sysUser.setLastLoginTime(date);
+        sysUser.setuId(user.getuId());
         try {
             userMapper.updateOneSelective(sysUser);
         } catch (Exception e) {
@@ -153,7 +156,7 @@ public class UserServiceImpl implements UserService {
      *
      * @param loginUser {@link WxUserVO}
      * @return {@link Result}
-     * <p>登录成功状态码信息，否则抛出异常</p>
+     * <p>登录成功状态码信息和openid，否则抛出异常</p>
      */
     @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
@@ -186,7 +189,9 @@ public class UserServiceImpl implements UserService {
             userMapper.updateOneSelective(sysUser);
         }
 
-        return Result.success();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put(ResultConstant.RESULT_DATA_OPENID_KEY,openid);
+        return Result.success(map);
     }
 
     /**

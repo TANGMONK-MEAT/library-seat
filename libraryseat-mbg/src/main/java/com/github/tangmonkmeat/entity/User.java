@@ -7,6 +7,14 @@ import java.util.List;
 public class User implements Serializable {
     private Integer uId;
 
+    public User() {
+    }
+
+    public User(String uAccount,String wxOpenid) {
+        this.wxOpenid = wxOpenid;
+        this.uAccount = uAccount;
+    }
+
     private String wxOpenid;
 
     private String uAccount;

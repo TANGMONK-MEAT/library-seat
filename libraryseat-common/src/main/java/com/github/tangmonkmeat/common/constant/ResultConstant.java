@@ -17,4 +17,7 @@ public class ResultConstant {
      */
     public final static String RESULT_DATA_MESSAGE_KEY = "message";
 
+    public final static String RESULT_DATA_OPENID_KEY = "openid";
+
+
 }

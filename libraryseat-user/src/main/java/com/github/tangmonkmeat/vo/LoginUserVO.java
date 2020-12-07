@@ -1,5 +1,7 @@
 package com.github.tangmonkmeat.vo;
 
+import com.sun.istack.internal.NotNull;
+
 /**
  * 接收登录信息
  *
@@ -24,14 +26,14 @@ public class LoginUserVO {
      * 验证码
      *
      */
-    private String code;
+    private String openid;
 
     @Override
     public String toString() {
         return "LoginUserVO{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", code='" + code + '\'' +
+                ", code='" + openid + '\'' +
                 '}';
     }
 
@@ -51,11 +53,11 @@ public class LoginUserVO {
         this.password = password;
     }
 
-    public String getCode() {
-        return code;
+    public String getOpenid() {
+        return openid;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 }
