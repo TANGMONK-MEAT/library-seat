@@ -6,8 +6,10 @@ import com.github.tangmonkmeat.common.constant.RedisConstant;
 import com.github.tangmonkmeat.common.constant.ResultConstant;
 import com.github.tangmonkmeat.common.constant.WeChatConstant;
 import com.github.tangmonkmeat.common.enums.Lock;
+import com.github.tangmonkmeat.entity.Score;
 import com.github.tangmonkmeat.entity.User;
 import com.github.tangmonkmeat.exception.BusinessException;
+import com.github.tangmonkmeat.mapper.ScoreMapper;
 import com.github.tangmonkmeat.mapper.UserMapper;
 import com.github.tangmonkmeat.result.Result;
 import com.github.tangmonkmeat.result.ResultEnum;
@@ -46,6 +48,8 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper<User> userMapper;
+    @Resource
+    private ScoreMapper<Score> scoreMapper;
 
     @Resource
     private ShiroUserService shiroUserService;
@@ -55,6 +59,8 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private WxMiniApi wxMiniApi;
+
+
 
     /**
      * 用户登录业务
@@ -205,9 +211,14 @@ public class UserServiceImpl implements UserService {
      * @return {@link IntergrityAndTimeVO}
      */
     @Override
-    public IntergrityAndTimeVO getIntergrityAndTime() {
-
-        return null;
+    public IntergrityAndTimeVO getIntergrityAndTime(String account) {
+        Score score = new Score();
+        score.setStuName(account);
+        score = scoreMapper.findOneSelective(score);
+        if(score==null){
+            throw new BusinessException(ResultEnum.RESULT_DATA_NONE);
+        }
+        return new IntergrityAndTimeVO(score.getTotal());
     }
 
     /**

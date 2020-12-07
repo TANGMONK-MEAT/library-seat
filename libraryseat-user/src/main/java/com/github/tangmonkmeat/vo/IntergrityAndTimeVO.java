@@ -20,21 +20,21 @@ public class IntergrityAndTimeVO {
      * 例如：80
      *
      */
-    private Integer lowIntergrity;
+    private Integer lowIntergrity=80;
 
     /**
      * 今天的预约时间，
      * 例如：12:00-14:00
      *
      */
-    private String todayTime;
+    private String todayTime="8:00-20:00";
 
     /**
      * 明天的预约时间，
      * 例如：12:00-14:00
      *
      */
-    private String tomTime;
+    private String tomTime="8:00-20:00";
 
     @Override
     public String toString() {
@@ -44,6 +44,13 @@ public class IntergrityAndTimeVO {
                 ", todayTime='" + todayTime + '\'' +
                 ", tomTime='" + tomTime + '\'' +
                 '}';
+    }
+
+    public IntergrityAndTimeVO() {
+    }
+
+    public IntergrityAndTimeVO(Integer userIntergrity) {
+        this.userIntergrity = userIntergrity;
     }
 
     public Integer getUserIntergrity() {
